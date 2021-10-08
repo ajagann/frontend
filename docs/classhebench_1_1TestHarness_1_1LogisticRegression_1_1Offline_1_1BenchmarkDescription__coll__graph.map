@@ -1,0 +1,6 @@
+<map id="hebench::TestHarness::LogisticRegression::Offline::BenchmarkDescription" name="hebench::TestHarness::LogisticRegression::Offline::BenchmarkDescription">
+<area shape="rect" id="node1" title=" " alt="" coords="9,288,239,344"/>
+<area shape="rect" id="node2" href="$classhebench_1_1TestHarness_1_1LogisticRegression_1_1BenchmarkDescriptionCategory.html" title=" " alt="" coords="5,184,243,240"/>
+<area shape="rect" id="node3" href="$classhebench_1_1TestHarness_1_1PartialBenchmarkDescription.html" title="Provides boilerplate implementation to common methods of interface IBenchmarkDescription and implemen..." alt="" coords="15,95,233,136"/>
+<area shape="rect" id="node4" href="$classhebench_1_1TestHarness_1_1IBenchmarkDescription.html" title=" " alt="" coords="33,5,215,47"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="hebench::TestHarness::EltwiseAdd::BenchmarkDescriptionCategory" name="hebench::TestHarness::EltwiseAdd::BenchmarkDescriptionCategory">
+<area shape="rect" id="node1" title=" " alt="" coords="5,184,264,240"/>
+<area shape="rect" id="node2" href="$classhebench_1_1TestHarness_1_1PartialBenchmarkDescription.html" title="Provides boilerplate implementation to common methods of interface IBenchmarkDescription and implemen..." alt="" coords="25,95,244,136"/>
+<area shape="rect" id="node3" href="$classhebench_1_1TestHarness_1_1IBenchmarkDescription.html" title=" " alt="" coords="43,5,226,47"/>
+</map>

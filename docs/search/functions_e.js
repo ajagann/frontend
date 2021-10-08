@@ -1,0 +1,9 @@
+var searchData=
+[
+  ['raiihandle_847',['RAIIHandle',['../classhebench_1_1TestHarness_1_1PartialBenchmarkCategory_1_1RAIIHandle.html#a540cd39cf19978139086f09acd237fbb',1,'hebench::TestHarness::PartialBenchmarkCategory::RAIIHandle::RAIIHandle()'],['../classhebench_1_1TestHarness_1_1PartialBenchmarkCategory_1_1RAIIHandle.html#a0223c52fedeb534eefe94909e70215ac',1,'hebench::TestHarness::PartialBenchmarkCategory::RAIIHandle::RAIIHandle(RAIIHandle &amp;&amp;rhs) noexcept'],['../classhebench_1_1TestHarness_1_1PartialBenchmarkCategory_1_1RAIIHandle.html#a4b277d73d5ca1d562dbd4b1a1e28a7db',1,'hebench::TestHarness::PartialBenchmarkCategory::RAIIHandle::RAIIHandle(const hebench::APIBridge::Handle &amp;h)']]],
+  ['registersupportedbenchmark_848',['registerSupportedBenchmark',['../classhebench_1_1TestHarness_1_1BenchmarkFactory.html#a0c7bd7acf92f2bb10dcbb91689f47622',1,'hebench::TestHarness::BenchmarkFactory']]],
+  ['relin_5fkeys_849',['relin_keys',['../classTutorialEngine.html#a93c59355bf169e09b3f8c0de3bbe7c0d',1,'TutorialEngine']]],
+  ['reset_850',['reset',['../classhebench_1_1Utilities_1_1Math_1_1ComponentCounter.html#ac256a22e4237c54a595db8e738c61918',1,'hebench::Utilities::Math::ComponentCounter']]],
+  ['retrievefromhandle_851',['retrieveFromHandle',['../classhebench_1_1cpp_1_1BaseEngine.html#a1951e5a864ad7699fd30a062b7e9576d',1,'hebench::cpp::BaseEngine']]],
+  ['run_852',['run',['../classhebench_1_1TestHarness_1_1BenchmarkLatency.html#aaa586ef06e19b4c269d5fd22c1de7272',1,'hebench::TestHarness::BenchmarkLatency::run()'],['../classhebench_1_1TestHarness_1_1BenchmarkOffline.html#a3a838d62a793f4c5ce577e925bdcec8a',1,'hebench::TestHarness::BenchmarkOffline::run()'],['../classhebench_1_1TestHarness_1_1IBenchmark.html#a319340482f32f623363b4aa9d80c96c5',1,'hebench::TestHarness::IBenchmark::run()']]]
+];

@@ -1,0 +1,9 @@
+<map id="hebench::TestHarness::IDataLoader" name="hebench::TestHarness::IDataLoader">
+<area shape="rect" id="node1" title=" " alt="" coords="5,136,169,177"/>
+<area shape="rect" id="node2" href="$classhebench_1_1TestHarness_1_1PartialDataLoader.html" title="Base class for data loaders and data generators." alt="" coords="217,136,381,177"/>
+<area shape="rect" id="node3" href="$classhebench_1_1TestHarness_1_1DotProduct_1_1DataGenerator.html" title=" " alt="" coords="440,5,647,47"/>
+<area shape="rect" id="node4" href="$classhebench_1_1TestHarness_1_1EltwiseAdd_1_1DataGenerator.html" title=" " alt="" coords="440,71,647,112"/>
+<area shape="rect" id="node5" href="$classhebench_1_1TestHarness_1_1EltwiseMult_1_1DataGenerator.html" title=" " alt="" coords="438,136,649,177"/>
+<area shape="rect" id="node6" href="$classhebench_1_1TestHarness_1_1LogisticRegression_1_1DataGenerator.html" title=" " alt="" coords="461,202,625,258"/>
+<area shape="rect" id="node7" href="$classhebench_1_1TestHarness_1_1MatrixMultiply_1_1DataGenerator.html" title=" " alt="" coords="429,283,657,324"/>
+</map>
