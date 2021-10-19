@@ -28,7 +28,7 @@ jobs:
   
   check-matrix:
     runs-on: ubuntu-latest
-    needs: find_scripts
+    needs: find-scripts
     steps:
       - name: Install json2yaml
         run: |
