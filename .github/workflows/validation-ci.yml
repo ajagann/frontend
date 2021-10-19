@@ -44,7 +44,7 @@ jobs:
           
   validation:
     runs-on: icx
-    needs: check-matrix
+    needs: find-scripts
     strategy:
       matrix: 
         script: ${{fromJson(needs.find-scripts.outputs.matrix)}}
