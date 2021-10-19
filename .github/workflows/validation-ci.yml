@@ -22,12 +22,14 @@ jobs:
       
       - id: set-matrix
         run: |
+          set -x
           matrix=$(python3 -c 'import os, json; print(json.dumps(os.listdir(".github/validation-ci")))')
           pre='[{"script":'
           matrix="${pre}${matrix}}]"
           echo $matrix
           diff_mat=$(toJSON($matrix))
-          echo diff_mat
+          echo $diff_mat
+          set +x
           echo "::set-output name=matrix::$diff_mat"
   
   check-matrix:
