@@ -24,8 +24,6 @@ jobs:
         run: |
           set -x
           matrix=$(python3 -c 'import os, json; print(json.dumps(os.listdir(".github/validation-ci")))')
-          pre='[{"script":'
-          matrix="${pre}${matrix}}]"
           echo $matrix
           echo "::set-output name=matrix::$matrix"
           set +x
@@ -40,7 +38,6 @@ jobs:
           set -x
           matrix='${{ needs.find-scripts.outputs.matrix }}'
           echo $matrix
-          echo $matrix | jq .
           tmp=$(${{fromJson(needs.find-scripts.outputs.matrix)}} | jq .)
           echo $tmp
           set +x
@@ -49,7 +46,8 @@ jobs:
     runs-on: icx
     needs: check-matrix
     strategy:
-      matrix: ${{fromJson(needs.find-scripts.outputs.matrix)}}
+      matrix: 
+        script: ${{fromJson(needs.find-scripts.outputs.matrix)}}
 
     steps:
       - name: Clone Repository (Latest on development)
