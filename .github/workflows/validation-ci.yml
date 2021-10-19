@@ -23,6 +23,8 @@ jobs:
       - id: set-matrix
         run: |
           matrix=$(python3 -c 'import os, json; print(json.dumps(os.listdir(".github/validation-ci")))')
+          pre='{"script":'
+          matrix="${pre}${matrix}}"
           echo $matrix
           echo "::set-output name=matrix::$matrix"
   
@@ -46,8 +48,7 @@ jobs:
     runs-on: icx
     needs: check-matrix
     strategy:
-      matrix: 
-        script: ${{fromJson(needs.find-scripts.outputs.matrix)}}
+      matrix: ${{fromJson(needs.find-scripts.outputs.matrix)}}
 
     steps:
       - name: Clone Repository (Latest on development)
