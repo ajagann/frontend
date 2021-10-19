@@ -40,7 +40,7 @@ jobs:
           echo $matrix
           echo $matrix | jq .
           echo $matrix | json2yaml
-          echo fromJson(needs.find-scripts.outputs.matrix)
+          echo ${{ fromJson(needs.find-scripts.outputs.matrix) }}
 
   validation:
     runs-on: icx
