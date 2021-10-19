@@ -36,7 +36,7 @@ jobs:
 
       - name: Check matrix definition
         run: |
-          matrix='${{ needs.find-scripts.outputs.matrix }}'
+          matrix=${{ needs.find-scripts.outputs.matrix }}
           echo $matrix
           echo $matrix | jq .
           echo $matrix | json2yaml
@@ -47,7 +47,7 @@ jobs:
     needs: check-matrix
     strategy:
       matrix: 
-        script: ${{ needs.find-scripts.outputs.matrix }}
+        script: ["config_symlink_validation.sh", "invalid_so.sh", "backend_tmp_validation.sh", "invalid_yml.sh", "backend_symlink_validation.sh", "config_tmp_validation.sh"] # ${{ needs.find-scripts.outputs.matrix }}
 
     steps:
       - name: Clone Repository (Latest on development)
