@@ -13,8 +13,26 @@ env:
   BUILD_TYPE: Release
 
 jobs:
-  setup:
+  find-scripts:
+    runs-on: ubuntu-latest
+    outputs: 
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v2
+      
+      - id: set-matrix
+        run: |
+          matrix=$(ls .github/validation-ci/ | tr " " "\n" | sed -e 's/^/- /')
+          echo $matrix
+          echo "::set-output name=matrix::$matrix"
+
+  validation:
     runs-on: icx
+    needs: scripts
+    strategy:
+      matrix: 
+        script: ${{fromJson(needs.find-scripts.outputs.matrix)}}
+
     steps:
       - name: Clone Repository (Latest on development)
         uses: actions/checkout@v2
@@ -27,61 +45,57 @@ jobs:
         with:
           ref: ${{ github.event.ref }}
 
-      - name: Setup
+      - name: Test Matrix
         run: |
-          set -x
-          git branch --show-current
-          cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/build
-          cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} -j
-          cmake --install ${{github.workspace}}/build
+          echo "${{ matrix.scripts }}"
+          
+  # setup:
+  #   runs-on: icx
+  #   steps:
+  #     - name: Clone Repository (Latest on development)
+  #       uses: actions/checkout@v2
+  #       if: github.event.ref == ''
+  #       with:
+  #         ref: development
+  #     - name: Clone Repository (Manual Selection)
+  #       uses: actions/checkout@v2
+  #       if: github.event.ref != ''
+  #       with:
+  #         ref: ${{ github.event.ref }}
 
-          CLEARTEXTLIB=${{github.workspace}}/build/lib/libhebench_example_backend.so
-          echo "CLEARTEXTLIB=${{github.workspace}}/build/lib/libhebench_example_backend.so" >> $GITHUB_ENV
+  #     - name: Setup
+  #       run: |
+  #         git branch --show-current
+  #         cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/build
+  #         cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} -j
+  #         cmake --install ${{github.workspace}}/build
 
-          # Create config.yml
-          ${{github.workspace}}/build/bin/test_harness --config_file ${{github.workspace}}/build/config.yaml --backend_lib_path $CLEARTEXTLIB --dump
-          set +x
+  #         CLEARTEXTLIB=${{github.workspace}}/build/lib/libhebench_example_backend.so
+  #         echo "CLEARTEXTLIB=${{github.workspace}}/build/lib/libhebench_example_backend.so" >> $GITHUB_ENV
 
-  SYMLINK:
-    name: symlink check
-    needs: setup
-    runs-on: icx
-    steps:
-      - name: Validation loading symlink to backend
-        working-directory: ${{github.workspace}}/build
-        run: ../.github/validation-ci/backend_symlink_validation.sh
+  #         # Create config.yml
+  #         ${{github.workspace}}/build/bin/test_harness --config_file ${{github.workspace}}/build/config.yaml --backend_lib_path $CLEARTEXTLIB --dump
+      
+  #     - name: Symlink check (Load symlink to backend)
+  #       working-directory: ${{github.workspace}}/build
+  #       run: ../.github/validation-ci/backend_symlink_validation.sh
 
-      - name: Validation loading symlink to config
-        working-directory: ${{github.workspace}}/build
-        run: ../.github/validation-ci/config_symlink_validation.sh
+  #     - name: Symlink check (Load symlink to config)
+  #       working-directory: ${{github.workspace}}/build
+  #       run: ../.github/validation-ci/config_symlink_validation.sh
 
-  SO:
-    name: .so check
-    needs: setup
-    runs-on: icx
-    steps:
-      - name: Validate .so
-        working-directory: ${{github.workspace}}/build
-        run: ../.github/validation-ci/invalid_so.sh
+  #     - name: Validate .so
+  #       working-directory: ${{github.workspace}}/build
+  #       run: ../.github/validation-ci/invalid_so.sh
 
-  YML:
-    name: .yml check
-    needs: setup
-    runs-on: icx
-    steps:
-      - name: Validate yml
-        working-directory: ${{github.workspace}}/build
-        run: ../.github/validation-ci/invalid_yml.sh
+  #     - name: Validate .yml
+  #       working-directory: ${{github.workspace}}/build
+  #       run: ../.github/validation-ci/invalid_yml.sh
 
-  TMP:
-    name: tmp check
-    needs: setup
-    runs-on: icx
-    steps:
-      - name: Validate loading backend from tmp
-        working-directory: ${{github.workspace}}/build
-        run: ../.github/validation-ci/backend_tmp_validation.sh
+  #     - name: Tmp check (Load backend from tmp)
+  #       working-directory: ${{github.workspace}}/build
+  #       run: ../.github/validation-ci/backend_tmp_validation.sh
 
-      - name: Validate loading config from tmp
-        working-directory: ${{github.workspace}}/build
-        run: ../.github/validation-ci/config_tmp_validation.sh
+  #     - name: Tmp check (Load config from tmp)
+  #       working-directory: ${{github.workspace}}/build
+  #       run: ../.github/validation-ci/config_tmp_validation.sh
