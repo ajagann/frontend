@@ -22,7 +22,7 @@ jobs:
       
       - id: set-matrix
         run: |
-          matrix=$(python3 -c 'import os, json; print(json.dumps("'script':" + str(os.listdir(".github/validation-ci"))))')
+          matrix=$(python3 -c 'import os, json; print(json.dumps("'script': " + str(os.listdir(".github/validation-ci"))))')
           echo $matrix
           echo "::set-output name=matrix::$matrix"
   
