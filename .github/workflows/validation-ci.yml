@@ -36,7 +36,7 @@ jobs:
 
       - name: Check matrix definition
         run: |
-          matrix=${{ needs.find-scripts.outputs.matrix }}
+          matrix='${{ needs.find-scripts.outputs.matrix }}'
           echo $matrix
           echo $matrix | jq .
           echo $matrix | json2yaml
