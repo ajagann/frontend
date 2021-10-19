@@ -22,9 +22,9 @@ jobs:
       
       - id: set-matrix
         run: |
-          matrix="script:\n$(ls .github/validation-ci/ | tr " " "\n" | sed -e "s/^/  - /")"
-          echo -e $matrix
-          echo -e "::set-output name=matrix::$matrix"
+          matrix=$(python3 -c 'import os, json; print(json.dumps("{'script':" + str(os.listdir(".github/validation-ci")) + "}"))')
+          echo $matrix
+          echo "::set-output name=matrix::$matrix"
   
   check-matrix:
     runs-on: ubuntu-latest
