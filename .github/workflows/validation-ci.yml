@@ -47,7 +47,7 @@ jobs:
     needs: check-matrix
     strategy:
       matrix: 
-        script: ${{ fromJson(needs.find-scripts.outputs.matrix) }}
+        script: ${{ needs.find-scripts.outputs.matrix }}
 
     steps:
       - name: Clone Repository (Latest on development)
