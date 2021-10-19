@@ -25,10 +25,25 @@ jobs:
           matrix="script:\n$(ls .github/validation-ci/ | tr " " "\n" | sed -e "s/^/  - /")"
           echo -e $matrix
           echo -e "::set-output name=matrix::$matrix"
+  
+  check-matrix:
+    runs-on: ubuntu-latest
+    needs: find_scripts
+    steps:
+      - name: Install json2yaml
+        run: |
+          sudo npm install -g json2yaml
+
+      - name: Check matrix definition
+        run: |
+          matrix='${{ needs.find-scripts.outputs.matrix }}'
+          echo $matrix
+          echo $matrix | jq .
+          echo $matrix | json2yaml
 
   validation:
     runs-on: icx
-    needs: find-scripts
+    needs: check-matrix
     strategy:
       matrix: ${{ fromJson(needs.find-scripts.outputs.matrix) }}
 
