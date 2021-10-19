@@ -22,16 +22,15 @@ jobs:
       
       - id: set-matrix
         run: |
-          matrix=$(ls .github/validation-ci/ | tr " " "\n" | sed -e 's/^/- /')
-          echo $matrix
-          echo "::set-output name=matrix::$matrix"
+          matrix="script:\n$(ls .github/validation-ci/ | tr " " "\n" | sed -e "s/^/  - /")"
+          echo -e $matrix
+          echo -e "::set-output name=matrix::$matrix"
 
   validation:
     runs-on: icx
     needs: find-scripts
     strategy:
-      matrix: 
-        script: ${{ fromJson(needs.find-scripts.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.find-scripts.outputs.matrix) }}
 
     steps:
       - name: Clone Repository (Latest on development)
@@ -47,7 +46,7 @@ jobs:
 
       - name: Test Matrix
         run: |
-          echo "${{ matrix.scripts }}"
+          echo "${{ matrix.script }}"
           
   # setup:
   #   runs-on: icx
