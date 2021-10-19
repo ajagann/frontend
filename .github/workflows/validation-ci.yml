@@ -23,10 +23,12 @@ jobs:
       - id: set-matrix
         run: |
           matrix=$(python3 -c 'import os, json; print(json.dumps(os.listdir(".github/validation-ci")))')
-          pre='{"script":'
-          matrix="${pre}${matrix}}"
+          pre='[{"script":'
+          matrix="${pre}${matrix}}]"
           echo $matrix
-          echo "::set-output name=matrix::$matrix"
+          diff_mat=$(toJSON($matrix))
+          echo diff_mat
+          echo "::set-output name=matrix::$diff_mat"
   
   check-matrix:
     runs-on: ubuntu-latest
@@ -42,7 +44,7 @@ jobs:
           echo $matrix
           echo $matrix | jq .
           echo $matrix | json2yaml
-          echo ${{ fromJson(needs.find-scripts.outputs.matrix) }}
+          echo ${{fromJson(needs.find-scripts.outputs.matrix)}}
 
   validation:
     runs-on: icx
