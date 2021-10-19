@@ -27,27 +27,22 @@ jobs:
           pre='[{"script":'
           matrix="${pre}${matrix}}]"
           echo $matrix
-          diff_mat=$(toJSON($matrix))
-          echo $diff_mat
+          echo "::set-output name=matrix::$matrix"
           set +x
-          echo "::set-output name=matrix::$diff_mat"
-  
+
   check-matrix:
     runs-on: ubuntu-latest
     needs: find-scripts
     steps:
-      - name: Install json2yaml
-        run: |
-          sudo npm install -g json2yaml
-
       - name: Check matrix definition
         run: |
+          set -x
           matrix='${{ needs.find-scripts.outputs.matrix }}'
           echo $matrix
           echo $matrix | jq .
-          echo $matrix | json2yaml
-          echo ${{fromJson(needs.find-scripts.outputs.matrix)}}
-
+          echo ${{fromJson(needs.find-scripts.outputs.matrix)}} | jq .
+          set +x
+          
   validation:
     runs-on: icx
     needs: check-matrix
