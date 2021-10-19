@@ -41,7 +41,8 @@ jobs:
           matrix='${{ needs.find-scripts.outputs.matrix }}'
           echo $matrix
           echo $matrix | jq .
-          echo ${{fromJson(needs.find-scripts.outputs.matrix)}} | jq .
+          tmp=$(${{fromJson(needs.find-scripts.outputs.matrix)}} | jq .)
+          echo $tmp
           set +x
           
   validation:
