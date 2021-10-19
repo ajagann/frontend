@@ -28,10 +28,10 @@ jobs:
 
   validation:
     runs-on: icx
-    needs: scripts
+    needs: find-scripts
     strategy:
       matrix: 
-        script: ${{fromJson(needs.find-scripts.outputs.matrix)}}
+        script: ${{ fromJson(needs.find-scripts.outputs.matrix) }}
 
     steps:
       - name: Clone Repository (Latest on development)
